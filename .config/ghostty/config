@@ -1,0 +1,8 @@
+theme = Catppuccin Mocha
+background-opacity = 0.85
+background-blur = 20
+shell-integration = zsh
+shell-integration-features = true
+macos-titlebar-style = tabs
+keybind = global:cmd+`=toggle_quick_terminal
+
