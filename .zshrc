@@ -15,6 +15,7 @@ alias brwe=brew
 
 export SSL_CERT_FILE="$(brew --prefix)/share/ca-certificates/cacert.pem"
 export BAT_THEME_DARK="Catppuccin Mocha"
+export GPG_TTY=$(tty)
 
 alias ls=lsd
 alias lst="lsd --tree"

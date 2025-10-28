@@ -26,6 +26,7 @@ vim.g.plugin_lualine = true
 vim.g.plugin_flash = true
 vim.g.plugin_transparent = true
 vim.g.plugin_oil = true
+vim.g.plugin_harpoon = true
 
 vim.g.extension_toggleterm_lazygit = true
 
