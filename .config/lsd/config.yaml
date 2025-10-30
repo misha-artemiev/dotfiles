@@ -1,3 +1,5 @@
 layout: oneline
 color:
   when: never
+sorting:
+  dir-grouping: first
