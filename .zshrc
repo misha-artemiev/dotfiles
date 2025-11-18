@@ -10,15 +10,18 @@ alias cd=z
 
 export PATH="/Users/mishaartemiev/.homebrew/opt/openjdk/bin:$PATH"
 export PATH="/Users/mishaartemiev/.ghcup/bin:$PATH"
+export PATH="/Users/mishaartemiev/.homebrew/opt/python@3.14/libexec/bin:$PATH"
 
 alias brwe=brew
 
 export SSL_CERT_FILE="$(brew --prefix)/share/ca-certificates/cacert.pem"
 export BAT_THEME_DARK="Catppuccin Mocha"
 export GPG_TTY=$(tty)
+export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt"
 
 alias ls=lsd
 alias lst="lsd --tree"
 alias j=just
 alias m=make
-alias cat='bat --paging=never'
+alias cat="bat --paging=never"
+alias talosctl="talosctl --talosconfig clusterconfig/talosconfig"
