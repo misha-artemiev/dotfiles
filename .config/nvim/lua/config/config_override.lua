@@ -7,7 +7,6 @@ vim.g.lang_lua = true
 vim.g.lang_just = true
 vim.g.lang_haskell = true
 
-vim.g.plugin_nvim_tree = false
 vim.g.plugin_dashboard = true
 vim.g.plugin_which_key = true
 vim.g.plugin_trouble = true
