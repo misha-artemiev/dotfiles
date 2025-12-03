@@ -1,0 +1,8 @@
+[alias]
+    qc = "!git commit -m \"auto-snapshot:  {$(git diff --staged --shortstat | cut -c 2-)}\" -m \"$(git diff --summary --staged | cut -c 2- | sed 's/^/  - /')\""
+    a = "!git add ."
+    p = "!git push"
+
+[user]
+    name = "Misha Artemiev"
+    email = "mykhailo.artemiev@icloud.com"

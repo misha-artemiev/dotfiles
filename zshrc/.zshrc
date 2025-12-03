@@ -25,3 +25,4 @@ alias j=just
 alias m=make
 alias cat="bat --paging=never"
 alias talosctl="talosctl --talosconfig clusterconfig/talosconfig"
+alias g=git
