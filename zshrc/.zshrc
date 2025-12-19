@@ -11,6 +11,7 @@ alias cd=z
 export PATH="/Users/mishaartemiev/.homebrew/opt/openjdk/bin:$PATH"
 export PATH="/Users/mishaartemiev/.ghcup/bin:$PATH"
 export PATH="/Users/mishaartemiev/.homebrew/opt/python@3.14/libexec/bin:$PATH"
+export PATH="/Users/mishaartemiev/.local/bin:$PATH"
 
 alias brwe=brew
 
