@@ -5,6 +5,7 @@
 --vim.g.lang_swift = true
 vim.g.lang_lua = true
 vim.g.lang_just = true
+vim.g.lang_bash = true
 --vim.g.lang_haskell = true
 
 vim.g.plugin_dashboard = true
