@@ -1,11 +1,11 @@
-vim.g.lang_python = true
-vim.g.lang_go = true
-vim.g.lang_java = true
+--vim.g.lang_python = true
+--vim.g.lang_go = true
+--vim.g.lang_java = true
 vim.g.lang_make = true
 vim.g.lang_swift = true
 vim.g.lang_lua = true
 vim.g.lang_just = true
-vim.g.lang_haskell = true
+--vim.g.lang_haskell = true
 
 vim.g.plugin_dashboard = true
 vim.g.plugin_which_key = true
