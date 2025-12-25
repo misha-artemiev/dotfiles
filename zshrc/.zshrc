@@ -25,4 +25,5 @@ alias lst="lsd --tree"
 alias j=just
 alias m=make
 alias cat="bat --paging=never"
+alias passget="openssl rand -hex 16"
 alias g=git
