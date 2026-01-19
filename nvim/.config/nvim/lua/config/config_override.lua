@@ -1,4 +1,4 @@
---vim.g.lang_python = true
+vim.g.lang_python = true
 --vim.g.lang_go = true
 --vim.g.lang_java = true
 --vim.g.lang_make = true
