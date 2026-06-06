@@ -1,0 +1,14 @@
+readOnly: false
+defaultNamespace: flux-system
+defaultControllerNamespace: flux-system
+ui:
+  enableMouse: false
+  headless: false
+  noIcons: false
+  skin: catppuccin-mocha
+  splashless: false
+logger:
+  tail: 100
+  buffer: 5000
+  sinceSeconds: 300
+  textWrap: false

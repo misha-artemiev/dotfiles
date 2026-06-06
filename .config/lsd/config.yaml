@@ -1,0 +1,5 @@
+layout: oneline
+color:
+  theme: custom
+sorting:
+  dir-grouping: first
