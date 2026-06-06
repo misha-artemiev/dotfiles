@@ -130,7 +130,6 @@ alias ssh-keychain='ssh-add --apple-use-keychain ~/.ssh/id_ed25519'
 
 source $BREW_PREFIX/share/fzf-tab/fzf-tab.zsh
 source $BREW_PREFIX/share/powerlevel10k/powerlevel10k.zsh-theme
-source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 source $BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
