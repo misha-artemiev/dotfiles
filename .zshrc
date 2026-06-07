@@ -79,7 +79,7 @@ opencode-isolated() {
       (subpath \"/System\")
       (subpath \"/private/var\")
       (subpath \"/etc\")
-      (subpath \"${HOME}/.homebrew\")
+      (subpath \"${BREW_PREFIX}\")
       (literal \"/\"))
     (allow file-ioctl
       (subpath \"/dev\"))
@@ -87,7 +87,7 @@ opencode-isolated() {
     (allow ipc-posix*)
     (allow sysctl-read)
     (allow mach-lookup)
-  " "${HOME}/.homebrew/bin/opencode" "$@"
+  " "${BREW_PREFIX}/bin/opencode" "$@"
 }
 
 nvim() {
@@ -116,8 +116,6 @@ alias k=kubectl
 alias n=nvim
 alias lock='pmset displaysleepnow'
 alias t=talosctl
-alias tal='talosctl --talosconfig ./clusterconfig/talosconfig'
-alias {sp,spotify}=spotify_player
 alias gitui='gitui -t catppuccin-mocha.ron'
 alias cdf='cd "$(osascript -e '\''tell app "Finder" to POSIX path of (insertion location as alias)'\'')"'
 alias f9s=flux9s
