@@ -5,5 +5,5 @@
 [alias]
     a = add .
     p = push
-    qc = "!git commit -m \"auto-snapshot: $(git diff --cached --stat | tail -1)\""
+    qc = "!git commit -m \"auto-snapshot: {$(git diff --cached --stat | tail -1)}\""
     ui = "!gitui"
