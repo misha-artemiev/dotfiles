@@ -2,13 +2,13 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-eval "$(~/.homebrew/bin/brew shellenv)"
+eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+BREW_PREFIX="$(brew --prefix)"
 
-FPATH="$HOME/.homebrew/share/zsh/site-functions:$FPATH"
+FPATH="$BREW_PREFIX/share/zsh/site-functions:$FPATH"
 autoload -Uz compinit
 compinit -C
 
-BREW_PREFIX="$(brew --prefix)"
 
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
@@ -32,7 +32,7 @@ export FZF_DEFAULT_OPTS=" \
 --color=selected-bg:#45475A \
 --color=border:#6C7086,label:#CDD6F4"
 
-flux9s() { DYLD_LIBRARY_PATH=~/.homebrew/opt/openssl@3/lib command flux9s "$@" }
+flux9s() { DYLD_LIBRARY_PATH=$BREW_PREFIX/opt/openssl@3/lib command flux9s "$@" }
 
 google() {
   local query="${(j:+:)@}"
@@ -127,9 +127,12 @@ alias sopse='sops -e -i'
 alias zshs='source ~/.zshrc'
 alias zshe='nvim ~/.zshrc'
 alias ssh-keychain='ssh-add --apple-use-keychain ~/.ssh/id_ed25519'
+alias sudo-touch='sed "s/^#auth/auth/" /etc/pam.d/sudo_local.template | sudo tee /etc/pam.d/sudo_local'
 
 source $BREW_PREFIX/share/fzf-tab/fzf-tab.zsh
 source $BREW_PREFIX/share/powerlevel10k/powerlevel10k.zsh-theme
+
+source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 source $BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
