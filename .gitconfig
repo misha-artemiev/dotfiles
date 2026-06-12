@@ -2,6 +2,9 @@
 	name = Misha Artemiev
 	email = mykhailo.artemiev@icloud.com
 
+[init]
+    defaultBranch = master
+
 [alias]
     a = add .
     p = push
