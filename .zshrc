@@ -24,6 +24,7 @@ export HOMEBREW_REQUIRE_TAP_TRUST=1
 export BAT_THEME_DARK="Catppuccin Mocha"
 export NODE_EXTRA_CA_CERTS="$BREW_PREFIX/etc/ca-certificates/cert.pem"
 export EDITOR="nvim"
+export DOCKER_HOST="unix://${HOME}/.colima/docker.sock"
 
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,spinner:#F5E0DC,hl:#F38BA8 \
