@@ -16,7 +16,7 @@ eval "$(zoxide init zsh)"
 export PATH="$BREW_PREFIX/opt/python@3.14/libexec/bin:$PATH"
 export PATH="$BREW_PREFIX/opt/make/libexec/gnubin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
-export PATH="$BREW_PREFIX/opt/openjdk@21/bin:$PATH"
+export PATH="$BREW_PREFIX/opt/openjdk/bin:$PATH"
 export PATH="$BREW_PREFIX/opt/llvm/bin:$BREW_PREFIX/opt/bison/bin:$PATH"
 export SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt
 export HOMEBREW_NO_ENV_HINTS=1
