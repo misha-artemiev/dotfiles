@@ -1,0 +1,18 @@
+[2m2026-07-01T17:33:49+01:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-07-01T17:33:49+01:00[0m [92mINF[0m No context configured
+[2m2026-07-01T17:33:52+01:00[0m [91mERR[0m Unable to nuke k9s shell pod [2merror=[0m"no active context available"
+[2m2026-07-01T17:36:10+01:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-07-01T17:36:10+01:00[0m [92mINF[0m No context configured
+[2m2026-07-01T17:36:13+01:00[0m [91mERR[0m Failed to obtain list of namespaces [2merror=[0m"user not authorized to list all namespaces"
+[2m2026-07-01T17:36:14+01:00[0m [91mERR[0m Unable to nuke k9s shell pod [2merror=[0m"no active context available"
+[2m2026-07-01T17:37:10+01:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-07-01T17:37:10+01:00[0m [92mINF[0m No context configured
+[2m2026-07-01T17:37:12+01:00[0m [91mERR[0m Failed to obtain list of namespaces [2merror=[0m"user not authorized to list all namespaces"
+[2m2026-07-01T17:37:13+01:00[0m [91mERR[0m Unable to nuke k9s shell pod [2merror=[0m"no active context available"
+[2m2026-07-01T17:38:18+01:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-07-01T17:38:18+01:00[0m [92mINF[0m No context configured
+[2m2026-07-01T17:38:18+01:00[0m [93mWRN[0m Refresh rate is below minimum, capping to minimum value [2mrequested=[0m0 [2mminimum=[0m2
+[2m2026-07-01T17:38:20+01:00[0m [91mERR[0m Unable to nuke k9s shell pod [2merror=[0m"no active context available"
+[2m2026-07-01T17:40:59+01:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-07-01T17:40:59+01:00[0m [92mINF[0m No context configured
+[2m2026-07-01T17:41:00+01:00[0m [91mERR[0m Unable to nuke k9s shell pod [2merror=[0m"no active context available"
