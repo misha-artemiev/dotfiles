@@ -9,6 +9,7 @@ FPATH="$BREW_PREFIX/share/zsh/site-functions:$FPATH"
 autoload -Uz compinit
 compinit -C
 
+setopt interactivecomments
 
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
@@ -25,6 +26,7 @@ export BAT_THEME_DARK="Catppuccin Mocha"
 export NODE_EXTRA_CA_CERTS="$BREW_PREFIX/etc/ca-certificates/cert.pem"
 export EDITOR="nvim"
 export K9S_CONFIG_DIR="$HOME/.config/k9s"
+export JAVA_HOME="$BREW_PREFIX/opt/openjdk@21"
 
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,spinner:#F5E0DC,hl:#F38BA8 \
@@ -55,41 +57,6 @@ extract() {
     *.jar)     jar xf $1    ;;
     *)         echo "unknown format" ;;
   esac
-}
-
-opencode-isolated() {
-  local cwd
-  cwd="$(pwd)"
-  sandbox-exec -p "
-    (version 1)
-    (deny default)
-    (allow process*)
-    (allow signal)
-    (allow file-read-metadata)
-    (allow file-read* file-write*
-      (subpath \"${cwd}\")
-      (subpath \"${HOME}/.local/share/opencode\")
-      (subpath \"${HOME}/.local/state/opencode\")
-      (subpath \"${HOME}/.config/opencode\")
-      (subpath \"${HOME}/.cache/opencode\")
-      (subpath \"/private/tmp\")
-      (subpath \"/private/var/folders\")
-      (subpath \"/dev\"))
-    (allow file-read*
-      (subpath \"/usr\")
-      (subpath \"/Library\")
-      (subpath \"/System\")
-      (subpath \"/private/var\")
-      (subpath \"/etc\")
-      (subpath \"${BREW_PREFIX}\")
-      (literal \"/\"))
-    (allow file-ioctl
-      (subpath \"/dev\"))
-    (allow network-outbound)
-    (allow ipc-posix*)
-    (allow sysctl-read)
-    (allow mach-lookup)
-  " "${BREW_PREFIX}/bin/opencode" "$@"
 }
 
 nvim() {
