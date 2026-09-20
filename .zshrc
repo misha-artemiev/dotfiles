@@ -89,7 +89,7 @@ envtalosctl() {
     umask 077; 
     TMP_TALOSCONFIG=$(mktemp -p "$setup_ramsecrets" talosconfig.XXXXXXXX); 
     trap 'shred -u "$TMP_TALOSCONFIG" 2>/dev/null || rm -f "$TMP_TALOSCONFIG"' EXIT; 
-    \cat <(pass show "cluster/$1/talosconfig") > "$TMP_TALOSCONFIG";
+    pass show "cluster/$1/talosconfig" > "$TMP_TALOSCONFIG";
     talosctl --talosconfig "$TMP_TALOSCONFIG" "${@:2}"
 }
 
@@ -97,7 +97,7 @@ envkubectl() {
     umask 077; 
     TMP_KUBECONFIG=$(mktemp -p "$setup_ramsecrets" kubeconfig.XXXXXXXX); 
     trap 'shred -u "$TMP_KUBECONFIG" 2>/dev/null || rm -f "$TMP_KUBECONFIG"' EXIT; 
-    \cat <(pass show "cluster/$1/kubeconfig") > "$TMP_KUBECONFIG";
+    pass show "cluster/$1/kubeconfig" > "$TMP_KUBECONFIG";
     kubectl --kubeconfig "$TMP_KUBECONFIG" "${@:2}"
 }
 
