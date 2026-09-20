@@ -73,6 +73,34 @@ nvim() {
     command nvim "$@"
 }
 
+setup_ramsecrets() {
+    if [[ "$(uname)" == "Darwin" ]]; then
+        [[ -d /Volumes/RAMSecrets ]] || diskutil erasevolume HFS+ "RAMSecrets" $(hdiutil attach -nomount ram://32768)
+        echo /Volumes/RAMSecrets
+    else
+        local ramdir="$HOME/.ramsecrets"
+        mkdir -p "$ramdir"
+        mount | grep -q "$ramdir" || sudo mount -t tmpfs -o size=16M,mode=0700,uid=$(id -u),gid=$(id -g) tmpfs "$ramdir"
+        echo "$ramdir"
+    fi
+}
+
+envtalosctl() {
+    umask 077; 
+    TMP_TALOSCONFIG=$(mktemp -p "$setup_ramsecrets" talosconfig.XXXXXXXX); 
+    trap 'shred -u "$TMP_TALOSCONFIG" 2>/dev/null || rm -f "$TMP_TALOSCONFIG"' EXIT; 
+    \\cat <(pass show "cluster/$1/talosconfig") > "$TMP_TALOSCONFIG";
+    talosctl --talosconfig "$TMP_TALOSCONFIG" "${@:2}"
+}
+
+envkubectl() {
+    umask 077; 
+    TMP_KUBECONFIG=$(mktemp -p "$setup_ramsecrets" kubeconfig.XXXXXXXX); 
+    trap 'shred -u "$TMP_KUBECONFIG" 2>/dev/null || rm -f "$TMP_KUBECONFIG"' EXIT; 
+    \\cat <(pass show "cluster/$1/kubeconfig") > "$TMP_KUBECONFIG";
+    kubectl --kubeconfig "$TMP_KUBECONFIG" "${@:2}"
+}
+
 alias {b,brwe}=brew
 alias cat=bat
 alias cd=z
