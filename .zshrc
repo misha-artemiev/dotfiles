@@ -27,6 +27,7 @@ export NODE_EXTRA_CA_CERTS="$BREW_PREFIX/etc/ca-certificates/cert.pem"
 export EDITOR="nvim"
 export K9S_CONFIG_DIR="$HOME/.config/k9s"
 export JAVA_HOME="$BREW_PREFIX/opt/openjdk@21"
+export CLUSTER_DOMAIN="k8s.noxbound.com"
 
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,spinner:#F5E0DC,hl:#F38BA8 \
@@ -75,8 +76,14 @@ nvim() {
 
 setup_ramsecrets() {
     if [[ "$(uname)" == "Darwin" ]]; then
-        [[ -d /Volumes/RAMSecrets ]] || diskutil erasevolume HFS+ "RAMSecrets" $(hdiutil attach -nomount ram://32768)
-        echo /Volumes/RAMSecrets
+        MOUNTPOINT="/private/tmp/ramsecrets"
+        mkdir -p "$MOUNTPOINT"
+
+        if [[ ! -d "$MOUNTPOINT/.mounted_marker" ]] && ! mount | grep -q "$MOUNTPOINT"; then
+            DEV=$(hdiutil attach -nomount ram://32768 | tr -d '[:space:]')
+            newfs_hfs -v RAMSecrets "$DEV"
+            diskutil mount nobrowse -mountPoint "$MOUNTPOINT" "$DEV"
+        fi
     else
         local ramdir="$HOME/.ramsecrets"
         mkdir -p "$ramdir"
@@ -89,16 +96,16 @@ envtalosctl() {
     umask 077; 
     TMP_TALOSCONFIG=$(mktemp -p "$setup_ramsecrets" talosconfig.XXXXXXXX); 
     trap 'shred -u "$TMP_TALOSCONFIG" 2>/dev/null || rm -f "$TMP_TALOSCONFIG"' EXIT; 
-    pass show "cluster/$1/talosconfig" > "$TMP_TALOSCONFIG";
-    talosctl --talosconfig "$TMP_TALOSCONFIG" "${@:2}"
+    pass show "cluster/$CLUSTER_DOMAIN/talosconfig" > "$TMP_TALOSCONFIG";
+    talosctl --talosconfig "$TMP_TALOSCONFIG" "$@"
 }
 
 envkubectl() {
     umask 077; 
     TMP_KUBECONFIG=$(mktemp -p "$setup_ramsecrets" kubeconfig.XXXXXXXX); 
     trap 'shred -u "$TMP_KUBECONFIG" 2>/dev/null || rm -f "$TMP_KUBECONFIG"' EXIT; 
-    pass show "cluster/$1/kubeconfig" > "$TMP_KUBECONFIG";
-    kubectl --kubeconfig "$TMP_KUBECONFIG" "${@:2}"
+    pass show "cluster/$CLUSTER_DOMAIN/kubeconfig" > "$TMP_KUBECONFIG";
+    kubectl --kubeconfig "$TMP_KUBECONFIG" "$@"
 }
 
 alias {b,brwe}=brew
