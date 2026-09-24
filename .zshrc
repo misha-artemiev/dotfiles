@@ -10,6 +10,7 @@ autoload -Uz compinit
 compinit -C
 
 setopt interactivecomments
+setopt LOCAL_TRAPS
 
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
@@ -76,36 +77,37 @@ nvim() {
 
 setup_ramsecrets() {
     if [[ "$(uname)" == "Darwin" ]]; then
-        MOUNTPOINT="/private/tmp/ramsecrets"
-        mkdir -p "$MOUNTPOINT"
+        local ramdir="/private/tmp/ramsec"
+        mkdir -p "$ramdir"
 
-        if [[ ! -d "$MOUNTPOINT/.mounted_marker" ]] && ! mount | grep -q "$MOUNTPOINT"; then
-            DEV=$(hdiutil attach -nomount ram://32768 | tr -d '[:space:]')
-            newfs_hfs -v RAMSecrets "$DEV"
-            diskutil mount nobrowse -mountPoint "$MOUNTPOINT" "$DEV"
+        if [[ ! -d "$ramdir/.mounted_marker" ]] && ! mount | grep -q "$ramdir"; then
+            dev=$(hdiutil attach -nomount ram://32768 | tr -d '[:space:]')
+            newfs_hfs -v RAMSecrets "$dev"
+            diskutil mount nobrowse -mountPoint "$ramdir" "$dev"
         fi
+        echo "$ramdir"
     else
-        local ramdir="$HOME/.ramsecrets"
+        local ramdir="$HOME/.ramsec"
         mkdir -p "$ramdir"
         mount | grep -q "$ramdir" || sudo mount -t tmpfs -o size=16M,mode=0700,uid=$(id -u),gid=$(id -g) tmpfs "$ramdir"
         echo "$ramdir"
     fi
 }
 
-envtalosctl() {
+talosctl() {
     umask 077; 
     TMP_TALOSCONFIG=$(mktemp -p "$setup_ramsecrets" talosconfig.XXXXXXXX); 
     trap 'shred -u "$TMP_TALOSCONFIG" 2>/dev/null || rm -f "$TMP_TALOSCONFIG"' EXIT; 
     pass show "cluster/$CLUSTER_DOMAIN/talosconfig" > "$TMP_TALOSCONFIG";
-    talosctl --talosconfig "$TMP_TALOSCONFIG" "$@"
+    command talosctl --talosconfig "$TMP_TALOSCONFIG" "$@"
 }
 
-envkubectl() {
+kubectl() {
     umask 077; 
     TMP_KUBECONFIG=$(mktemp -p "$setup_ramsecrets" kubeconfig.XXXXXXXX); 
     trap 'shred -u "$TMP_KUBECONFIG" 2>/dev/null || rm -f "$TMP_KUBECONFIG"' EXIT; 
     pass show "cluster/$CLUSTER_DOMAIN/kubeconfig" > "$TMP_KUBECONFIG";
-    kubectl --kubeconfig "$TMP_KUBECONFIG" "$@"
+    command kubectl --kubeconfig "$TMP_KUBECONFIG" "$@"
 }
 
 alias {b,brwe}=brew
